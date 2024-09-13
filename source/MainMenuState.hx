@@ -13,6 +13,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import io.newgrounds.NG;
 import lime.app.Application;
+import ui.FlxVirtualPad;
 
 using StringTools;
 
@@ -37,6 +38,8 @@ class MainMenuState extends MusicBeatState
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
+
+	var _pad:FlxVirtualPad;
 
 	override function create()
 	{
@@ -156,6 +159,10 @@ class MainMenuState extends MusicBeatState
 
 		changeItem();
 
+		_pad = new FlxVirtualPad(UP_DOWN, A_B);
+		_pad.alpha = 0.75;
+		this.add(_pad);
+
 		super.create();
 	}
 
@@ -170,24 +177,36 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-			if (controls.UP_P)
+			var UP_P = _pad.buttonUp.justPressed;
+			var DOWN_P = _pad.buttonDown.justPressed;
+			var BACK = _pad.buttonB.justPressed;
+			var ACCEPT = _pad.buttonA.justPressed;
+			
+			if (UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(-1);
 			}
 
-			if (controls.DOWN_P)
+			if (DOWN_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(1);
 			}
 
-			if (controls.BACK)
+			#if android
+			if (BACK || FlxG.android.justReleased.BACK)
 			{
 				FlxG.switchState(new TitleState());
 			}
+			#else
+			if (BACK)
+			{
+				FlxG.switchState(new TitleState());
+		        }
+			#end
 
-			if (controls.ACCEPT)
+			if (ACCEPT)
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('confirmMenu'));
