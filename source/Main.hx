@@ -29,6 +29,10 @@
 		{
 			super();
 
+			SUtil.uncaughtErrorHandler();
+
+			SUtil.saveContent("reminder", ".txt", "remember to put your assets/mods to Android/media/com.ninjamuffin99.funkin!");
+
 			if (stage != null)
 			{
 				init();
@@ -66,6 +70,8 @@
 			#if !debug
 			initialState = TitleState;
 			#end
+
+			SUtil.checkFiles();
 
 			addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
