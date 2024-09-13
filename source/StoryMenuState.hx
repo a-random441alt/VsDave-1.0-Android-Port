@@ -12,6 +12,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
+import ui.FlxVirtualPad;
 
 using StringTools;
 
@@ -79,6 +80,8 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+
+	var _pad:FlxVirtualPad;
 
 	override function create()
 	{
@@ -235,6 +238,10 @@ class StoryMenuState extends MusicBeatState
 
 		trace("Line 165");
 
+		_pad = new FlxVirtualPad(FULL, A_B);
+    	        _pad.alpha = 0.75;
+    	        this.add(_pad);
+
 		super.create();
 	}
 
@@ -256,6 +263,17 @@ class StoryMenuState extends MusicBeatState
 		{
 			lock.y = grpWeekText.members[lock.ID].y;
 		});
+
+		var UP_P = _pad.buttonUp.justPressed;
+		var RIGHT_P = _pad.buttonRight.justPressed;
+		var DOWN_P = _pad.buttonDown.justPressed;
+		var LEFT_P = _pad.buttonLeft.justPressed;
+
+		var RIGHT = _pad.buttonRight.pressed;
+		var LEFT = _pad.buttonLeft.pressed;
+
+		var ACCEPT = _pad.buttonA.justPressed;
+		var BACK = _pad.buttonB.justPressed;
 
 		if (!movedBack)
 		{
