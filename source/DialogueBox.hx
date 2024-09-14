@@ -408,7 +408,16 @@ else
 			dialogueStarted = true;
 		}
 
-		if (FlxG.keys.justPressed.ANY  && dialogueStarted == true)
+		for (touch in FlxG.touches.list)
+		{
+		    screenJustTouched = false;
+			
+		    if (touch.justReleased){
+			screenJustTouched = true;
+		}
+	}
+
+		if (screenJustTouched || FlxG.keys.justPressed.ANY  && dialogueStarted == true)
 		{
 			remove(dialogue);
 			
