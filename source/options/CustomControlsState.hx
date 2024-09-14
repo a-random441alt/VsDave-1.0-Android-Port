@@ -183,7 +183,7 @@ class CustomControlsState extends MusicBeatSubstate
 		add(right_text);
 
 		// change selection
-		changeSelection();
+		// changeSelection();
 	}
 
 	override function update(elapsed:Float)
