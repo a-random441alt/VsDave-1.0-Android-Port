@@ -43,6 +43,9 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+#if mobile
+import mobilecontrols.Mobilecontrols;
+#end
 import flash.system.System;
 
 using StringTools;
@@ -169,6 +172,12 @@ class PlayState extends MusicBeatState
 	var defaultCamZoom:Float = 1.05;
 
 	public static var daPixelZoom:Float = 6;
+	
+	#if mobile
+	var mcontrols:Mobilecontrols; 
+	#end
+	
+	var config:Config = new Config();
 
 	public static var theFunne:Bool = true;
 	var funneEffect:FlxSprite;
@@ -1050,6 +1059,16 @@ class PlayState extends MusicBeatState
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
 		FlxG.fixedTimestep = false;
+		
+		#if mobile
+		mcontrols = new Mobilecontrols();
+		var camcontrol = new FlxCamera();
+		FlxG.cameras.add(camcontrol);
+		camcontrol.bgColor.alpha = 0;
+		mcontrols.cameras = [camcontrol];
+
+		add(mcontrols);
+		#end
 
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
@@ -1829,7 +1848,13 @@ class PlayState extends MusicBeatState
 		{
 			scoreTxt.text = "Score:" + songScore;
 		}
-		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+		#if android
+		var enterPressed = FlxG.keys.justPressed.ENTER || FlxG.android.justReleased.BACK;
+		#else
+		var enterPressed = FlxG.keys.justPressed.ENTER;
+		#end
+		
+		if (enterPressed && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2633,6 +2658,24 @@ class PlayState extends MusicBeatState
 	private function keyShit():Void
 	{
 		// HOLDING
+		#if mobile
+
+		var up = mcontrols.UP;
+		var right = mcontrols.RIGHT;
+		var down = mcontrols.DOWN;
+		var left = mcontrols.LEFT;
+
+		var upP = mcontrols.UP_P;
+		var rightP = mcontrols.RIGHT_P;
+		var downP = mcontrols.DOWN_P;
+		var leftP = mcontrols.LEFT_P;
+
+		var upR = mcontrols.UP_R;
+		var rightR = mcontrols.RIGHT_R;
+		var downR = mcontrols.DOWN_R;
+		var leftR = mcontrols.LEFT_R;
+
+		#else
 		var up = controls.UP;
 		var right = controls.RIGHT;
 		var down = controls.DOWN;
@@ -2647,6 +2690,23 @@ class PlayState extends MusicBeatState
 		var rightR = controls.RIGHT_R;
 		var downR = controls.DOWN_R;
 		var leftR = controls.LEFT_R;
+		#end
+
+		/*var up = controls.UP;
+		var right = controls.RIGHT;
+		var down = controls.DOWN;
+		var left = controls.LEFT;
+
+		var upP = controls.UP_P;
+		var rightP = controls.RIGHT_P;
+		var downP = controls.DOWN_P;
+		var leftP = controls.LEFT_P;
+
+		var upR = controls.UP_R;
+		var rightR = controls.RIGHT_R;
+		var downR = controls.DOWN_R;
+		var leftR = controls.LEFT_R;
+		*/
 
 		if (loadRep) // replay code
 		{
@@ -2968,10 +3028,24 @@ class PlayState extends MusicBeatState
 				noteMiss(note.noteData);
 				return;
 			}
-			var upP = controls.UP_P;
+			#if mobile
+
+		    var upP = mcontrols.UP_P;
+	      	var rightP = mcontrols.RIGHT_P;
+	    	var downP = mcontrols.DOWN_P;
+	    	var leftP = mcontrols.LEFT_P;
+
+	    	#else
+		    var upP = controls.UP_P;
+	    	var rightP = controls.RIGHT_P;
+	    	var downP = controls.DOWN_P;
+	    	var leftP = controls.LEFT_P;
+	    	#end
+			/*var upP = controls.UP_P;
 			var rightP = controls.RIGHT_P;
 			var downP = controls.DOWN_P;
 			var leftP = controls.LEFT_P;
+			*/
 	
 			if (leftP)
 				noteMiss(0);
