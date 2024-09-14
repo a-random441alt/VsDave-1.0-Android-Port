@@ -83,7 +83,7 @@ class OptionsMenu extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		_pad = new FlxVirtualPad(FULL, A_B_C);
+		_pad = new FlxVirtualPad(FULL, A_B);
 		_pad.alpha = 0.75;
 		this.add(_pad);
 
@@ -105,7 +105,7 @@ class OptionsMenu extends MusicBeatState
 		BACK = _pad.buttonB.justPressed;
 		#end
 
-		CONTROLS = _pad.buttonC.justPressed;
+		CONTROLS = _pad.buttonC.justReleased;
 			
 		ACCEPT = _pad.buttonA.justReleased;
 
