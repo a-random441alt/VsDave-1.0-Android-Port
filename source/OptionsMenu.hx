@@ -29,9 +29,10 @@ class OptionsMenu extends MusicBeatState
 	var DOWN_P:Bool;
 	var LEFT_R:Bool;
 	var RIGHT_R:Bool;
+	var CONTROLS:Bool;
 	var BACK:Bool;
 	var ACCEPT:Bool;
-	var CONTROLS:Bool;
+	//var CONTROLS:Bool;
 	
 	override function create()
 	{
@@ -99,13 +100,15 @@ class OptionsMenu extends MusicBeatState
 		RIGHT_R = _pad.buttonRight.justPressed;
 		LEFT_R = _pad.buttonLeft.justPressed;
 
+		CONTROLS = _pad.buttonC.justPressed;
+
 		#if android
 		BACK = _pad.buttonB.justPressed || FlxG.android.justReleased.BACK;
 		#else
 		BACK = _pad.buttonB.justPressed;
 		#end
 
-		CONTROLS = _pad.buttonC.justPressed;
+		//CONTROLS = _pad.buttonC.justPressed;
 			
 		ACCEPT = _pad.buttonA.justReleased;
 
