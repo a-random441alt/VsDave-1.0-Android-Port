@@ -14,6 +14,7 @@ import flixel.util.FlxColor;
 import io.newgrounds.NG;
 import lime.app.Application;
 import ui.FlxVirtualPad;
+import options.CustomControlsState;
 
 using StringTools;
 
@@ -24,7 +25,7 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	#if !switch
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options', 'change controls'];
 	#else
 	var optionShit:Array<String> = ['story mode', 'freeplay'];
 	#end
@@ -242,6 +243,8 @@ class MainMenuState extends MusicBeatState
 									FlxG.switchState(new OptionsMenu());
 								case 'ost':
 									FlxG.switchState(new MusicPlayerState());
+								case 'change controls':
+									FlxG.switchState(new CustomControlsState());
 							}
 						});
 					}
