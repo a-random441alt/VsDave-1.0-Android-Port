@@ -14,6 +14,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
 using StringTools;
+import ui.FlxVirtualPad;
 
 
 //a lot of this code is copied from freeplay lol
@@ -25,6 +26,7 @@ class MusicPlayerState extends MusicBeatState
     var songs:Array<PlaySongMetadata> = [];
     private var grpSongs:FlxTypedGroup<Alphabet>;
     private var iconArray:Array<HealthIcon> = [];
+    var _pad:FlxVirtualPad;
     var curSelected:Int = 0;
     var CurVocals:FlxSound;
     var currentlyplaying:Bool = false;
@@ -129,6 +131,9 @@ class MusicPlayerState extends MusicBeatState
 
         HideBar();
 
+	_pad = new FlxVirtualPad(FULL, A_B);
+	_pad.alpha = 0.65;
+	this.add(_pad);
 
         super.create();
     }
@@ -137,12 +142,30 @@ class MusicPlayerState extends MusicBeatState
     {
         super.update(elapsed);
 
-        var upP = controls.UP_P;
+        /*var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
 
         var leftP = controls.LEFT_P;
 		var rightP = controls.RIGHT_P;
 		var accepted = controls.ACCEPT;
+        */
+
+	#if android
+	var upP = _pad.buttonUp.justPressed;
+	var downP = _pad.buttonDown.justPressed;
+
+	var leftP = _pad.buttonLeft.justPressed;
+	var rightP = _pad.buttonRight.justPressed;
+	var accepted = _pad.buttonA.justPressed;
+	var BACK = _pad.buttonB.justPressed;
+	#else
+	var upP = controls.UP_P;
+	var downP = controls.DOWN_P;
+
+        var leftP = controls.LEFT_P;
+	var rightP = controls.RIGHT_P;
+	var accepted = controls.ACCEPT;
+	#end
 
 
         playdist = 1 - (FlxG.sound.music.time / FlxG.sound.music.length);
@@ -192,7 +215,7 @@ class MusicPlayerState extends MusicBeatState
         barText.text = FlxStringUtil.formatTime(FlxG.sound.music.time / 1000) + " / " +FlxStringUtil.formatTime(FlxG.sound.music.length / 1000);
 
 
-        if (controls.BACK)
+        if (BACK)
         {
             if (currentlyplaying)
             {
