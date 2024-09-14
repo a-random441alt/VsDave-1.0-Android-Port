@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import ui.FlxVirtualPad;
 
 class OptionsMenu extends MusicBeatState
 {
@@ -22,6 +23,16 @@ class OptionsMenu extends MusicBeatState
 
 	private var grpControls:FlxTypedGroup<Alphabet>;
 	var versionShit:FlxText;
+	var _pad:FlxVirtualPad;
+
+	var UP_P:Bool;
+	var DOWN_P:Bool;
+	var LEFT_R:Bool;
+	var RIGHT_R:Bool;
+	var BACK:Bool;
+	var ACCEPT:Bool;
+	var CONTROLS:Bool;
+	
 	override function create()
 	{
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
@@ -72,6 +83,10 @@ class OptionsMenu extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
+		_pad = new FlxVirtualPad(FULL, A_B_C);
+		_pad.alpha = 0.75;
+		this.add(_pad);
+
 		super.create();
 	}
 
@@ -79,27 +94,46 @@ class OptionsMenu extends MusicBeatState
 	{
 		super.update(elapsed);
 
-			if (controls.BACK)
+		UP_P = _pad.buttonUp.justReleased;
+		DOWN_P = _pad.buttonDown.justReleased;
+		RIGHT_R = _pad.buttonRight.justPressed;
+		LEFT_R = _pad.buttonLeft.justPressed;
+
+		#if android
+		BACK = _pad.buttonB.justPressed || FlxG.android.justReleased.BACK;
+		#else
+		BACK = _pad.buttonB.justPressed;
+		#end
+
+		CONTROLS = _pad.buttonC.justPressed;
+			
+		ACCEPT = _pad.buttonA.justReleased;
+
+			if (BACK)
 				FlxG.switchState(new MainMenuState());
-			if (controls.UP_P)
+			if (UP_P)
 				changeSelection(-1);
-			if (controls.DOWN_P)
+			if (DOWN_P)
 				changeSelection(1);
 			
-			if (controls.RIGHT_R)
+			if (RIGHT_R)
 			{
 				FlxG.save.data.offset++;
 				versionShit.text = "Offset (Left, Right): " + FlxG.save.data.offset;
 			}
 
-			if (controls.LEFT_R)
+			if (LEFT_R)
 				{
 					FlxG.save.data.offset--;
 					versionShit.text = "Offset (Left, Right): " + FlxG.save.data.offset;
 				}
-	
 
-			if (controls.ACCEPT)
+		        if (CONTROLS)
+			{
+				FlxG.switchState(new options.CustomControlsState());
+			}
+
+			if (ACCEPT)
 			{
 				grpControls.remove(grpControls.members[curSelected]);
 				switch(curSelected)
