@@ -301,9 +301,9 @@ class StoryMenuState extends MusicBeatState
 
 				if(curWeek != 9)
 				{
-					if (controls.RIGHT_P)
+					if (RIGHT_P)
 						changeDifficulty(1);
-					if (controls.LEFT_P)
+					if (LEFT_P)
 						changeDifficulty(-1);
 				}
 				else
