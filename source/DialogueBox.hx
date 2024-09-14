@@ -41,6 +41,8 @@ class DialogueBox extends FlxSpriteGroup
 	var handSelect:FlxSprite;
 	var bgFade:FlxSprite;
 
+	var screenJustTouched:Bool = false;
+
 	var debug:Bool = false;
 
 	var curshader:Dynamic;
