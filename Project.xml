@@ -170,14 +170,9 @@
 	<haxedef name="HXCPP_STACK_LINE" />
 	<haxedef name="HXCPP_STACK_TRACE" />
 
+	<!-- Android Setup-->
 	<section if="android">
-		<config>
-			<!--Gradle-->
-			<android gradle-version="7.4.2" gradle-plugin="7.3.1" /> <!-- ENABLE THIS IF YOU HAVE ISSUES AT COMPILE -->
-
-			<!--Target SDK-->
-			<android min-sdk-version="16" target-sdk-version="34" if="${lime &lt; 8.1.0}"/>
-                </config>
+		<config:android gradle-version="7.4.2" gradle-plugin="7.3.1" />
 	</section>
 
 	<!-- _________________________________ Custom _______________________________ -->
