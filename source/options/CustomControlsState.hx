@@ -90,7 +90,7 @@ class CustomControlsState extends MusicBeatSubstate
 			    bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
 		}
 		bg.color = 0xFFFDE871;
-		add(bg);
+		// add(bg);
 				
 		// load curSelected
 		if (_saveconrtol.data.buttonsmode == null){
