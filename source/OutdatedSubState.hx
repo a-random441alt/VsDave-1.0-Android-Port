@@ -6,12 +6,15 @@ import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import ui.FlxVirtualPad;
 
 class OutdatedSubState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
 	public static var needVer:String = "IDFK LOL";
+
+	var _pad:FlxVirtualPad;
 
 	override function create()
 	{
@@ -24,11 +27,17 @@ class OutdatedSubState extends MusicBeatState
 		txt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
 		txt.screenCenter();
 		add(txt);
+
+		_pad = new FlxVirtualPad(NONE, A);
+         	_pad.alpha = 0.75;
+    	        this.add(_pad);
 	}
 
 	override function update(elapsed:Float)
 	{
-		if (controls.PAUSE)
+		var PAUSE = _pad.buttonA.justPressed;
+		
+		if (PAUSE)
 		{
 			leftState = true;
 			FlxG.switchState(new MainMenuState());
