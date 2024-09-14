@@ -241,7 +241,7 @@ class CustomControlsState extends MusicBeatSubstate
 					return;
 				}
 			
-			_hb.visible = false;
+			// _hb.visible = false;
 	
 			switch curSelected{
 				case 0:
