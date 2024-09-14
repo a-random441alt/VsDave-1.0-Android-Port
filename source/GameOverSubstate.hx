@@ -6,6 +6,7 @@ import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import ui.FlxVirtualPad;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -13,6 +14,8 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollow:FlxObject;
 
 	var stageSuffix:String = "";
+
+	var _pad:FlxVirtualPad;
 
 	public function new(x:Float, y:Float,char:String)
 	{
@@ -53,18 +56,25 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.camera.target = null;
 
 		bf.playAnim('firstDeath');
+
+		_pad = new FlxVirtualPad(NONE, A_B);
+    	        _pad.alpha = 0.75;
+    	        this.add(_pad);
 	}
 
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		if (controls.ACCEPT)
+		var ACCEPT = _pad.buttonA.justPressed;
+		var BACK = _pad.buttonB.justPressed;
+
+		if (ACCEPT)
 		{
 			endBullshit();
 		}
 
-		if (controls.BACK)
+		if (controls.BACK || BACK)
 		{
 			FlxG.sound.music.stop();
 
@@ -72,7 +82,6 @@ class GameOverSubstate extends MusicBeatSubstate
 				FlxG.switchState(new StoryMenuState());
 			else
 				FlxG.switchState(new FreeplayState());
-			PlayState.loadRep = false;
 		}
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
