@@ -2335,8 +2335,8 @@ class PlayState extends MusicBeatState
 	}
 	function endSong():Void
 	{
-		if (!loadRep)
-			rep.SaveReplay();
+		//if (!loadRep)
+			//rep.SaveReplay();
 		inCutscene = false;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
