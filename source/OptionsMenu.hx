@@ -29,7 +29,7 @@ class OptionsMenu extends MusicBeatState
 	var DOWN_P:Bool;
 	var LEFT_R:Bool;
 	var RIGHT_R:Bool;
-	var CONTROLS:Bool;
+	// var CONTROLS:Bool;
 	var BACK:Bool;
 	var ACCEPT:Bool;
 	//var CONTROLS:Bool;
@@ -84,7 +84,7 @@ class OptionsMenu extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		_pad = new FlxVirtualPad(FULL, A_B_C);
+		_pad = new FlxVirtualPad(FULL, A_B);
 		_pad.alpha = 0.75;
 		this.add(_pad);
 
@@ -100,7 +100,7 @@ class OptionsMenu extends MusicBeatState
 		RIGHT_R = _pad.buttonRight.justPressed;
 		LEFT_R = _pad.buttonLeft.justPressed;
 
-		CONTROLS = _pad.buttonC.justPressed;
+		//CONTROLS = _pad.buttonC.justPressed;
 
 		#if android
 		BACK = _pad.buttonB.justPressed || FlxG.android.justReleased.BACK;
@@ -131,10 +131,10 @@ class OptionsMenu extends MusicBeatState
 					versionShit.text = "Offset (Left, Right): " + FlxG.save.data.offset;
 				}
 
-		        if (CONTROLS)
+		        /*if (CONTROLS)
 			{
 				FlxG.switchState(new options.CustomControlsState());
-			}
+			}*/
 
 			if (ACCEPT)
 			{
