@@ -33,6 +33,7 @@ import openfl.events.IOErrorEvent;
 import openfl.media.Sound;
 import openfl.net.FileReference;
 import openfl.utils.ByteArray;
+import ui.FlxVirtualPad;
 
 using StringTools;
 
@@ -82,6 +83,11 @@ class ChartingState extends MusicBeatState
 
 	var leftIcon:HealthIcon;
 	var rightIcon:HealthIcon;
+
+	var key_space:FlxButton;
+	var key_shift:FlxButton;
+
+	var _pad:FlxVirtualPad;
 
 	override function create()
 	{
@@ -170,6 +176,21 @@ class ChartingState extends MusicBeatState
 
 		add(curRenderedNotes);
 		add(curRenderedSustains);
+
+		// add buttons
+		key_space = new FlxButton(60, 60, "");
+                key_space.loadGraphic(Paths.image("key_space")); //"assets/images/key_space.png"
+                key_space.alpha = 0.75;
+                add(key_space);
+
+                key_shift = new FlxButton(60, 200, "");
+                key_shift.loadGraphic(Paths.image("key_shift")); //"assets/images/key_shift.png"
+                key_shift.alpha = 0.75;
+                add(key_shift);
+
+		_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
+    	        _pad.alpha = 0.75;
+    	        this.add(_pad);
 
 		super.create();
 	}
@@ -540,7 +561,13 @@ class ChartingState extends MusicBeatState
 				dummyArrow.y = Math.floor(FlxG.mouse.y / GRID_SIZE) * GRID_SIZE;
 		}
 
-		if (FlxG.keys.justPressed.ENTER)
+		#if android
+		var androidback = FlxG.android.justReleased.BACK;
+		#else
+		var androidback = false;
+		#end
+
+		if (FlxG.keys.justPressed.ENTER || androidback)
 		{
 			lastSection = curSection;
 
@@ -577,7 +604,7 @@ class ChartingState extends MusicBeatState
 
 		if (!typingShit.hasFocus)
 		{
-			if (FlxG.keys.justPressed.SPACE)
+			if (FlxG.keys.justPressed.SPACE || key_space.justPressed)
 			{
 				if (FlxG.sound.music.playing)
 				{
@@ -608,9 +635,9 @@ class ChartingState extends MusicBeatState
 				vocals.time = FlxG.sound.music.time;
 			}
 
-			if (!FlxG.keys.pressed.SHIFT)
+			if (!FlxG.keys.pressed.SHIFT || !key_shift.pressed)
 			{
-				if (FlxG.keys.pressed.W || FlxG.keys.pressed.S)
+				if (FlxG.keys.pressed.W || FlxG.keys.pressed.S || _pad.buttonUp.Pressed || _pad.buttonDown.Pressed)
 				{
 					FlxG.sound.music.pause();
 					vocals.pause();
@@ -629,7 +656,7 @@ class ChartingState extends MusicBeatState
 			}
 			else
 			{
-				if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.S)
+				if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.S || _pad.buttonUp.Pressed || _pad.buttonDown.Pressed)
 				{
 					FlxG.sound.music.pause();
 					vocals.pause();
