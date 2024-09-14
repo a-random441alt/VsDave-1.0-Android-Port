@@ -189,7 +189,9 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
+		#if desktop
 		eyesoreson = FlxG.save.data.eyesores;
+		#end
 		sicks = 0;
 		bads = 0;
 		shits = 0;
