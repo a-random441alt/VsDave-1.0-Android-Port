@@ -637,7 +637,7 @@ class ChartingState extends MusicBeatState
 
 			if (!FlxG.keys.pressed.SHIFT || !key_shift.pressed)
 			{
-				if (FlxG.keys.pressed.W || FlxG.keys.pressed.S || _pad.buttonUp.Pressed || _pad.buttonDown.Pressed)
+				if (FlxG.keys.pressed.W || FlxG.keys.pressed.S || _pad.buttonUp.pressed || _pad.buttonDown.pressed)
 				{
 					FlxG.sound.music.pause();
 					vocals.pause();
@@ -656,7 +656,7 @@ class ChartingState extends MusicBeatState
 			}
 			else
 			{
-				if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.S || _pad.buttonUp.Pressed || _pad.buttonDown.Pressed)
+				if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.S || _pad.buttonUp.pressed || _pad.buttonDown.pressed)
 				{
 					FlxG.sound.music.pause();
 					vocals.pause();
