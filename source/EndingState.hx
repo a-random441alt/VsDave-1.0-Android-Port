@@ -12,6 +12,8 @@ class EndingState extends FlxState
 
 	var _ending:String;
 	var _song:String;
+
+	var justTouched:Bool = false;
 	
 	public function new(ending:String,song:String) 
 	{
@@ -33,6 +35,15 @@ class EndingState extends FlxState
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
+
+		#if android
+                for (touch in FlxG.touches.list)
+	                if (touch.justPressed)
+		                justTouched = true;
+
+                if (justTouched)
+			endIt();
+		#end
 		
 		if (FlxG.keys.pressed.ENTER){
 			endIt();
