@@ -8,6 +8,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
 import flixel.util.FlxStringUtil;
+import ui.FlxVirtualPad;
 
 /**
  ben don't use any dave mod specific code here this needs to be generic so you can re-use it in your own mods
@@ -37,6 +38,8 @@ class CharacterSelectState extends FlxState
 	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25]];
 	public var polishedCharacterList:Array<String> = ["Boyfriend","Pixel Boyfriend","Tristan","Dave","Mr. Bambi","3D Dave"];
 	//it goes left,right,up,down
+
+	var _pad:FlxVirtualPad;
 
 	public function new() 
 	{
@@ -113,6 +116,10 @@ class CharacterSelectState extends FlxState
 		characterText.fieldWidth = 1080;
 		characterText.alignment = FlxTextAlign.CENTER;
 		add(characterText);
+
+		_pad = new FlxVirtualPad(LEFT_RIGHT, A_B);
+		_pad.alpha = 0.65;
+		this.add(_pad);
 	}
 
 
@@ -174,7 +181,11 @@ class CharacterSelectState extends FlxState
 	{
 		super.update(elapsed);
 		//FlxG.camera.focusOn(FlxG.ce);
-		if (FlxG.keys.justPressed.ENTER){
+		var LEFT_P = _pad.buttonLeft.justPressed;
+		var RIGHT_P = _pad.buttonRight.justPressed;
+		var accepted = _pad.buttonA.justPressed;
+		
+		if (accepted){
 			if (!FlxG.save.data.unlockedcharacters[current])
 			{
 				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
@@ -204,7 +215,7 @@ class CharacterSelectState extends FlxState
 
 		notemodtext.text = FlxStringUtil.formatMoney(CharacterNoteMs[current][0]) + "x       " + FlxStringUtil.formatMoney(CharacterNoteMs[current][3]) + "x        " + FlxStringUtil.formatMoney(CharacterNoteMs[current][2]) + "x       " + FlxStringUtil.formatMoney(CharacterNoteMs[current][1]) + "x";
 
-		if (FlxG.keys.justPressed.LEFT){
+		if (LEFT_P){
 			current--;
 			if (current < 0)
 			{
@@ -218,7 +229,7 @@ class CharacterSelectState extends FlxState
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
 
-		if (FlxG.keys.justPressed.RIGHT){
+		if (RIGHT_P){
 			current++;
 			if (current < 0)
 			{
