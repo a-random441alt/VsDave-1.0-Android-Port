@@ -77,8 +77,8 @@ class VideoState extends MusicBeatState
 			}
 		}
 
-		GlobalVideo.get().source(leSource);
-		GlobalVideo.get().clearPause();
+		//GlobalVideo.get().source(leSource);
+		//GlobalVideo.get().clearPause();
 		if (GlobalVideo.isWebm)
 		{
 			GlobalVideo.get().updatePlayer();
