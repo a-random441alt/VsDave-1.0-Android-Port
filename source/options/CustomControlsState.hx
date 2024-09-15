@@ -267,7 +267,7 @@ class CustomControlsState extends MusicBeatSubstate
 				case 4:
 					remove(_pad);
 					_pad.alpha = 0;
-					_hb.visible = true;
+					//_hb.visible = true;
 
 			}
 	
