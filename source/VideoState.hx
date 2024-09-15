@@ -83,7 +83,7 @@ class VideoState extends MusicBeatState
 		{
 			GlobalVideo.get().updatePlayer();
 		}
-		GlobalVideo.get().show();
+		//GlobalVideo.get().show();
 		if (GlobalVideo.isWebm)
 		{
 			GlobalVideo.get().restart();
