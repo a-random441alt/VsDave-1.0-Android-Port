@@ -207,7 +207,7 @@ class CustomControlsState extends MusicBeatSubstate
 			if(touch.overlaps(leftArrow) && touch.justPressed){
 				changeSelection(-1);
 			}else if (touch.overlaps(rightArrow) && touch.justPressed){
-				changeSelection(1);
+				//changeSelection(1);
 			}
 
 			//custom pad 
@@ -267,7 +267,7 @@ class CustomControlsState extends MusicBeatSubstate
 				case 4:
 					remove(_pad);
 					_pad.alpha = 0;
-					_hb.visible = true;
+					//_hb.visible = true;
 
 			}
 	
