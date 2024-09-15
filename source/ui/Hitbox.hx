@@ -48,7 +48,7 @@ class Hitbox extends FlxSpriteGroup
         add(hitbox_hint);
 
 
-        hitbox.add(add(left = createhitbox(0, "left")));
+       // hitbox.add(add(left = createhitbox(0, "left")));
 
         hitbox.add(add(down = createhitbox(sizex, "down")));
 
@@ -62,7 +62,7 @@ class Hitbox extends FlxSpriteGroup
         var frames = FlxAtlasFrames.fromSparrow('assets/shared/images/hitbox/hitbox.png', 'assets/shared/images/hitbox/hitbox.xml');
         
 
-        button.loadGraphic(FlxGraphic.fromFrame(frames.getByName(framestring)));
+        //button.loadGraphic(FlxGraphic.fromFrame(frames.getByName(framestring)));
 
         button.alpha = 0;
 
