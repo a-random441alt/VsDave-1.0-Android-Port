@@ -48,7 +48,7 @@ class Hitbox extends FlxSpriteGroup
         add(hitbox_hint);
 
 
-       // hitbox.add(add(left = createhitbox(0, "left")));
+       hitbox.add(add(left = createhitbox(sizex, "left")));
 
         hitbox.add(add(down = createhitbox(sizex, "down")));
 
