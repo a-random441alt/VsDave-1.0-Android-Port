@@ -64,13 +64,34 @@ class CustomControlsState extends MusicBeatSubstate
     	_saveconrtol.bind("saveconrtol");
 		
 		// bg
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic('assets/images/menuBG.png');
+		var randomNum:Int = FlxG.random.int(0, 6);
+
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.18;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
+		switch(randomNum)
+		{
+			case 0:
+				bg.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+			case 1:
+				bg.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
+			case 2:
+				bg.loadGraphic(Paths.image('backgrounds/Olyantwo'));
+			case 3:
+				bg.loadGraphic(Paths.image('backgrounds/morie'));
+			case 4:
+				bg.loadGraphic(Paths.image('backgrounds/mantis'));
+			case 5:
+				bg.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+			case 6:
+				bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
+		}
+		bg.color = 0xFFFDE871;
+		add(bg);
 
 		// load curSelected
 		if (_saveconrtol.data.buttonsmode == null){
