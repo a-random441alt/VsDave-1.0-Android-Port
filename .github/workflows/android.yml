@@ -59,7 +59,7 @@ jobs:
           haxelib git polymod https://github.com/larsiusprime/polymod.git f3c0320aa51c848318934c2893ed78f42b7de74c
           haxelib git faxe https://github.com/uhrobots/faxe
           haxelib git extension-webm https://github.com/a-random441/extension-webm.git
-          haxelib git extension-androidtools https://github.com/a-random441/extension-androidtools.git c0f09f2399780091de02eb40caf5ac4f695f9cac
+          haxelib git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools.git c0f09f2399780091de02eb40caf5ac4f695f9cac
           haxelib install actuate 
           haxelib list
       # For Compiling to Work, do this
