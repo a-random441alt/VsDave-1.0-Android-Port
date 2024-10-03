@@ -119,6 +119,7 @@ class CharacterSelectState extends FlxState
 
 		_pad = new FlxVirtualPad(LEFT_RIGHT, A_B);
 		_pad.alpha = 0.65;
+		_pad.scale.set(1.25, 1.25); // honestly bro idk if it fixes it
 		this.add(_pad);
 	}
 
@@ -184,6 +185,7 @@ class CharacterSelectState extends FlxState
 		var LEFT_P = _pad.buttonLeft.justPressed;
 		var RIGHT_P = _pad.buttonRight.justPressed;
 		var accepted = _pad.buttonA.justPressed;
+		var back = _pad.buttonB.justPressed;
 		
 		if (accepted){
 			if (!FlxG.save.data.unlockedcharacters[current])
@@ -241,6 +243,10 @@ class CharacterSelectState extends FlxState
 			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		}
+
+		if (back){
+			FlxG.switchState(new FreeplayState()); // IDK
 		}
 		
 	}
