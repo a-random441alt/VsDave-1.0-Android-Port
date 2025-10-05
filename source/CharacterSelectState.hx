@@ -119,7 +119,7 @@ class CharacterSelectState extends FlxState
 
 		_pad = new FlxVirtualPad(LEFT_RIGHT, A_B);
 		_pad.alpha = 0.65;
-		_pad.scale.set(1.25, 1.25); // honestly bro idk if it fixes it
+		_pad.cameras = cameras;
 		this.add(_pad);
 	}
 
