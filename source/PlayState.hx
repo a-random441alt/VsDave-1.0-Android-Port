@@ -3445,7 +3445,14 @@ class PlayState extends MusicBeatState
 		trace(amogus);
 		if(amogus == 0)
 		{
-			FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
+			var webmplayer1 = new WebmPlayerS("assets/videos/mazeecutscenee.webm", true);
+						//LoadingState.loadAndSwitchState(new WebmPlayerS("assets/videos/Cutscene1Subtitles.webm", new PlayState()));
+					        webmplayer1.endcallback = () -> {
+					                remove(webmplayer1);
+				                        LoadingState.loadAndSwitchState(new PlayState());
+			                        }
+					        add(webmplayer1);
+			                        webmplayer1.play();
 		}
 		amogus++;
 		trace(amogus);
