@@ -107,9 +107,7 @@ class PlayState extends MusicBeatState
 	private var totalNotesHit:Float = 0;
 	private var totalPlayed:Int = 0;
 	private var ss:Bool = false;
-	#if desktop
 	public static var eyesoreson = true;
-	#end
 	private var STUPDVARIABLETHATSHOULDNTBENEEDED:FlxSprite;
 
 
