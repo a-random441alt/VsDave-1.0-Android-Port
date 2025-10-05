@@ -1747,7 +1747,7 @@ class PlayState extends MusicBeatState
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); //this is very stupid but doesn't effect memory all that much so
 		if(shakeCam && eyesoreson)
 		{
-			var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
+			//var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
 			FlxG.camera.shake(0.015, 0.015);
 		}
 		screenshader.shader.uTime.value[0] += elapsed;
