@@ -3,9 +3,7 @@ package;
 import flixel.math.FlxRandom;
 import openfl.net.FileFilter;
 import openfl.filters.BitmapFilter;
-#if desktop
 import Shaders.PulseEffect;
-#end
 import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxBasic;
@@ -69,9 +67,7 @@ class PlayState extends MusicBeatState
 	public var updatevels:Bool = false;
 	public static var curmult:Array<Float> = [1,1,1,1];
 	public var curbg:FlxSprite;
-        #if desktop
 	public var screenshader:Shaders.PulseEffect = new PulseEffect();
-	#end
 	public var UsingNewCam:Bool = false;
 
 	public var elapsedtime:Float = 0;
@@ -739,14 +735,12 @@ class PlayState extends MusicBeatState
 						bg.scrollFactor.set(0.9, 0.9);
 						bg.active = true;
 						add(bg);
-						#if desktop
 						//below code assumes shaders are always enabled which is bad
 						var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
 						testshader.waveAmplitude = 0.1;
 						testshader.waveFrequency = 5;
 						testshader.waveSpeed = 2;
 						bg.shader = testshader.shader;
-						#end
 						curbg = bg;
 						//UsingNewCam = true;
 					}
@@ -1740,7 +1734,6 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		elapsedtime += elapsed;
-		#if desktop
 		if (curbg != null)
 		{
 			if (curbg.active) //only the furiosity background is active
@@ -1749,16 +1742,14 @@ class PlayState extends MusicBeatState
 			shad.uTime.value[0] += elapsed;
 			}
 		}
-		#end
 		if(SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating')
 		{
 			dad.y += (Math.sin(elapsedtime) * 0.2);
 		}
-		#if desktop
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); //this is very stupid but doesn't effect memory all that much so
 		if(shakeCam && eyesoreson)
 		{
-			//var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
+			var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
 			FlxG.camera.shake(0.015, 0.015);
 		}
 		screenshader.shader.uTime.value[0] += elapsed;
@@ -1771,7 +1762,6 @@ class PlayState extends MusicBeatState
 			screenshader.shader.uampmul.value[0] -= (elapsed / 2);
 		}
 		screenshader.Enabled = shakeCam && eyesoreson;
-		#end
 		#if !debug
 		perfectMode = false;
 		#end
