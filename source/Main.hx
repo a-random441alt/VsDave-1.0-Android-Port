@@ -71,7 +71,7 @@
 			initialState = TitleState;
 			#end
 
-			SUtil.checkFiles();
+			// SUtil.checkFiles();
 
 			addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
